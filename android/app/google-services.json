@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "981089179663",
+    "project_id": "e--salon",
+    "storage_bucket": "e--salon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981089179663:android:e9374ec3cab0162eb7eb7a",
+        "android_client_info": {
+          "package_name": "mn.beesoft.salon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981089179663-a7ag82dg3uo6lafc8mes4gmom1bhhrg2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mn.beesoft.salon",
+            "certificate_hash": "4782c572647c0d849279cf075d537d4281338701"
+          }
+        },
+        {
+          "client_id": "981089179663-ffr15f6kb4uk3rjrlq805kngj1vk4oqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd8_NIVL0hCmoyx5HW-CF1I5QqG8Kj5_I"
+        }                 
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981089179663-ffr15f6kb4uk3rjrlq805kngj1vk4oqb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
