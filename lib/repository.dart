@@ -37,13 +37,15 @@ class Repository {
   Dio dio = new Dio();
   GetStorage storage = new GetStorage();
   BitmapDescriptor pin, dot, dotSelected;
-  DateFormat get format => DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'', 'en_US');
+  DateFormat get format =>
+      DateFormat('EEE, dd MMM yyyy HH:mm:ss \'GMT\'', 'en_US');
   DateFormat get bformat => DateFormat('yyyy.MM.dd', 'mn');
   DateFormat get orderday => DateFormat('yyyy-MM-dd', 'mn');
   DateFormat get ordertime => DateFormat('yyyy-MM-dd HH:mm', 'mn');
   DateFormat get onlytime => DateFormat('HH:mm', 'mn');
   DateFormat get oformat => DateFormat.MMMEd('mn');
-  String get empty => 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png';
+  String get empty =>
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png';
   String get emptyImage =>
       'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Ferror-404&psig=AOvVaw2qN1mXh4XuH3joBgDnt-su&ust=1635070227157000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLDcsb-l4PMCFQAAAAAdAAAAABAD';
   double statusBar = 0;
@@ -51,8 +53,10 @@ class Repository {
   setApp(app) => this.app = app;
   setArtistApp(app) => this.artistApp = app;
 
-  setDioOptions(url) {
-    dio.options.baseUrl = 'https://esalon.mn/api/$url/';
+  setDioOptions() {
+    // if (url != '') dio.options.baseUrl = 'https://esalon.mn/api/client/$url/';
+
+    dio.options.baseUrl = 'https://esalon.mn/api/client/';
     dio.options.headers['content-Type'] = 'application/json; charset=utf-8';
     dio.options.connectTimeout = 5000;
     dio.options.receiveTimeout = 3000;
@@ -60,7 +64,8 @@ class Repository {
 
   setToken(token) => dio.options.headers['authorization'] = 'Bearer $token';
 
-  snackBar(msg) => Fluttertoast.showToast(msg: msg, gravity: ToastGravity.SNACKBAR, toastLength: Toast.LENGTH_LONG);
+  snackBar(msg) => Fluttertoast.showToast(
+      msg: msg, gravity: ToastGravity.SNACKBAR, toastLength: Toast.LENGTH_LONG);
 
   Future<Uint8List> getBytesFromAsset(
     String path, {
@@ -213,7 +218,7 @@ class Repository {
   //Salon
   Future<List<Salon>> getSalons() async {
     try {
-      final response = await dio.get('salons');
+      final response = await dio.get('unauthorized/salons');
       final res = json.decode('$response');
       if (res['success']) {
         List data = res['data'];
@@ -228,7 +233,7 @@ class Repository {
   //Artist
   Future<List<Artist>> getArtists() async {
     try {
-      final response = await dio.get('artists');
+      final response = await dio.get('unauthorized/artists');
       final res = json.decode('$response');
       if (res['success']) {
         List data = res['data'];
@@ -242,7 +247,7 @@ class Repository {
 
   Future<List<Artist>> getArtistsBySalon(id) async {
     try {
-      final response = await dio.get('salon-artists/$id');
+      final response = await dio.get('unauthorized/salon-artists/$id');
       final res = json.decode('$response');
       if (res['success']) {
         List data = res['data'];
@@ -597,7 +602,8 @@ class Repository {
   //specialist api
   Future<Artist> getMeAsArtist() async {
     try {
-      final response = await dio.get('me-as-artist');
+      final response =
+          await dio.get('https://esalon.mn/api/specialist/me-as-artist');
       final res = json.decode('$response');
       if (res['success'])
         return Artist.fromJson(res['data']);
@@ -610,7 +616,8 @@ class Repository {
 
   Future<List<Post>> getMyPosts() async {
     try {
-      final response = await dio.get('my-posts');
+      final response =
+          await dio.get('https://esalon.mn/api/specialist/my-posts');
       final res = json.decode('$response');
       if (res['success']) {
         List data = res['data'];
@@ -624,7 +631,8 @@ class Repository {
 
   Future<List<ArtistOrder>> getMyOrders() async {
     try {
-      final response = await dio.get('my-orders');
+      final response =
+          await dio.get('https://esalon.mn/api/specialist/my-orders');
       final res = json.decode('$response');
       if (res['success']) {
         List data = res['data'];
@@ -678,7 +686,9 @@ class Repository {
     List<Media> links = [];
     for (var i = 0; i < files.length; i++) {
       try {
-        String path = "$type/image-" + DateFormat('yyyy-MM-dd-hh-mm-ss').format(DateTime.now()) + '-${app.user.id}$i';
+        String path = "$type/image-" +
+            DateFormat('yyyy-MM-dd-hh-mm-ss').format(DateTime.now()) +
+            '-${app.user.id}$i';
         await fbstorage.ref().child(path).putFile(files.elementAt(i));
         Media link = Media(
           name: path,

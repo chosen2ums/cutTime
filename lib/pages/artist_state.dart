@@ -70,33 +70,37 @@ class _ArtistState extends State<Artist> {
         ),
         resizeToAvoidBottomInset: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Theme.of(context).colorScheme.secondary,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          selectedFontSize: 14,
-          unselectedFontSize: 12,
-          iconSize: 22,
-          elevation: 0,
-          selectedIconTheme: IconThemeData(size: 27),
-          unselectedItemColor: Theme.of(context).hintColor,
-          currentIndex: this.page,
-          onTap: (index) => this.nomad(index, val),
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                  page == 0 ? Ionicons.calendar : Ionicons.calendar_outline),
-              label: 'Захиалга',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(page == 1 ? Ionicons.grid : Ionicons.grid_outline),
-              label: 'Пост',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(page == 2 ? Ionicons.person : Ionicons.person_outline),
-              label: 'Профайл',
-            ),
-          ],
+        bottomNavigationBar: SizedBox(
+          height: 100,
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.shifting,
+            selectedItemColor: Theme.of(context).colorScheme.secondary,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            selectedFontSize: 14,
+            unselectedFontSize: 12,
+            iconSize: 22,
+            elevation: 0,
+            selectedIconTheme: IconThemeData(size: 27),
+            unselectedItemColor: Theme.of(context).hintColor,
+            currentIndex: this.page,
+            onTap: (index) => this.nomad(index, val),
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(
+                    page == 0 ? Ionicons.calendar : Ionicons.calendar_outline),
+                label: 'Захиалга',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(page == 1 ? Ionicons.grid : Ionicons.grid_outline),
+                label: 'Пост',
+              ),
+              BottomNavigationBarItem(
+                icon:
+                    Icon(page == 2 ? Ionicons.person : Ionicons.person_outline),
+                label: 'Профайл',
+              ),
+            ],
+          ),
         ),
       ),
     );

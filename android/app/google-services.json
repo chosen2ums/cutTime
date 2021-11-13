@@ -14,11 +14,59 @@
       },
       "oauth_client": [
         {
-          "client_id": "981089179663-a7ag82dg3uo6lafc8mes4gmom1bhhrg2.apps.googleusercontent.com",
+          "client_id": "981089179663-21d7o079b5hr3rupna5f959fnj6j0rfu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "mn.beesoft.salon",
-            "certificate_hash": "4782c572647c0d849279cf075d537d4281338701"
+            "certificate_hash": "8a0ec17d11213730af6cb8dee54143e732e3a29f"
+          }
+        },
+        {
+          "client_id": "981089179663-5ceuj6oio3k2e3i2hav5jrl3nr20iasi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mn.beesoft.salon",
+            "certificate_hash": "b72e408798c5c9a393b81f6d72d8a4ca29ebaf0a"
+          }
+        },
+        {
+          "client_id": "981089179663-5ooigqbl8lph927ka65pfl5u68ocqf4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mn.beesoft.salon",
+            "certificate_hash": "e7aa1f8205ccd8d69b11b03fd4d1b8cce835f8dd"
+          }
+        },
+        {
+          "client_id": "981089179663-e780rp53i6qsf5587eic08nahmah5n5s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mn.beesoft.salon",
+            "certificate_hash": "84c33d53c0f77c78b7c719e0d09a6e2261edd9c5"
+          }
+        },
+        {
+          "client_id": "981089179663-lcoeobrqke9e63uon2pb3eckrs1e4seu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mn.beesoft.salon",
+            "certificate_hash": "888b2a401a9dddc5347c88cccb2b1138467d02d1"
+          }
+        },
+        {
+          "client_id": "981089179663-njk5963h80i7lvqsvtlo7mpjo0b9srtu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mn.beesoft.salon",
+            "certificate_hash": "b0f8582422bbc86a63efb3abcc66a3554272f188"
+          }
+        },
+        {
+          "client_id": "981089179663-ovcibidsgff5tq40vcmm7vf5bkhbds2g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mn.beesoft.salon",
+            "certificate_hash": "af8b484fc87136309bbe0e929e43aa62f375bcf1"
           }
         },
         {
@@ -29,7 +77,7 @@
       "api_key": [
         {
           "current_key": "AIzaSyAd8_NIVL0hCmoyx5HW-CF1I5QqG8Kj5_I"
-        }                 
+        }
       ],
       "services": {
         "appinvite_service": {

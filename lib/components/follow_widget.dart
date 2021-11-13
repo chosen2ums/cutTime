@@ -6,7 +6,7 @@ import 'package:salon/models/follow.dart';
 import 'package:salon/provider/app_provider.dart' as app;
 
 class FollowWidget extends StatefulWidget {
-  String head;
+  final String head;
   FollowWidget({this.head = 'Following', Key key}) : super(key: key);
 
   @override
@@ -18,7 +18,11 @@ class FollowWidgetState extends State<FollowWidget> {
   @override
   Widget build(BuildContext context) {
     app.AppProvider provider = Provider.of(context);
-    follow = provider.salons.where((e) => e.isFollow == true).toList().map((e) => Follow(salon: e)).toList();
+    follow = provider.salons
+        .where((e) => e.isFollow == true)
+        .toList()
+        .map((e) => Follow(salon: e))
+        .toList();
     return Visibility(
       visible: follow.length != 0,
       child: Container(
@@ -53,10 +57,12 @@ class FollowWidgetState extends State<FollowWidget> {
                 itemCount: follow.length,
                 padding: EdgeInsets.all(10),
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
+                itemBuilder: (context, index) =>
+                    AnimationConfiguration.staggeredList(
                   position: index,
                   duration: Duration(milliseconds: 200),
-                  child: FadeInAnimation(child: SingleLeaderWidget(follow.elementAt(index))),
+                  child: FadeInAnimation(
+                      child: SingleLeaderWidget(follow.elementAt(index))),
                 ),
                 separatorBuilder: (context, index) => SizedBox(width: 10),
               ),

@@ -8,6 +8,7 @@ import 'package:salon/pages/client/nearby.dart';
 import 'package:salon/pages/settings.dart';
 import 'package:salon/pages/home.dart';
 
+import 'components/artist_widget.dart';
 import 'components/not_found_widget.dart';
 import 'components/webview.dart';
 import 'pages/client/myposition.dart';
@@ -36,10 +37,15 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => CameraScreen());
       case '/WebView':
         WebViewArguments argument = args;
-        return MaterialPageRoute(builder: (_) => MyWebView(title: argument.title, selectedUrl: argument.selectedUrl));
+        return MaterialPageRoute(
+            builder: (_) => MyWebView(
+                title: argument.title, selectedUrl: argument.selectedUrl));
+      case '/Artist':
+        return MaterialPageRoute<Order>(builder: (_) => ArtistWidget(args));
       default:
         // If there is no such named route in the switch statement, e.g. /third
-        return MaterialPageRoute(builder: (_) => Scaffold(body: SafeArea(child: NotFoundWidget())));
+        return MaterialPageRoute(
+            builder: (_) => Scaffold(body: SafeArea(child: NotFoundWidget())));
     }
   }
 }

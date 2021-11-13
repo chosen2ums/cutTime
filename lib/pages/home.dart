@@ -41,7 +41,7 @@ class HomeKey extends StatelessWidget {
                 }
                 break;
               case app.Status.Unauthorized:
-                home = Login();
+                home = Artist();
                 break;
               case app.Status.Authorizing:
                 home = Login();

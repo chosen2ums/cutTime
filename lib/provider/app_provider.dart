@@ -24,7 +24,9 @@ enum State { Client, Artist }
 enum Status { Undefined, Authorized, Unauthorized, Authorizing }
 final dark = ThemeData(
   fontFamily: 'Raleway',
-  appBarTheme: AppBarTheme(backgroundColor: ThemeData.dark().scaffoldBackgroundColor, foregroundColor: Colors.white),
+  appBarTheme: AppBarTheme(
+      backgroundColor: ThemeData.dark().scaffoldBackgroundColor,
+      foregroundColor: Colors.white),
   colorScheme: ColorScheme.dark(
     secondary: Color(0xFF9054E7),
     secondaryVariant: Color(0xFFF88E77),
@@ -34,7 +36,8 @@ final dark = ThemeData(
 );
 final light = ThemeData(
   fontFamily: 'Raleway',
-  appBarTheme: AppBarTheme(backgroundColor: Colors.white, foregroundColor: Colors.black),
+  appBarTheme:
+      AppBarTheme(backgroundColor: Colors.white, foregroundColor: Colors.black),
   colorScheme: ColorScheme.light(
     secondary: Color(0xFF9054E7),
     secondaryVariant: Color(0xFFF88E77),
@@ -78,11 +81,14 @@ class AppProvider with ChangeNotifier {
     if (storage.hasData('position'))
       myposition = json.decode(storage.read('position'));
     else
-      await Geolocator.getCurrentPosition().then(setMyLocation).catchError((msg) => setMyLocation(null));
+      await Geolocator.getCurrentPosition()
+          .then(setMyLocation)
+          .catchError((msg) => setMyLocation(null));
     return null;
   }
 
-  setMyLocation(Position position) => myposition = position == null ? null : LatLng(position.latitude, position.longitude);
+  setMyLocation(Position position) => myposition =
+      position == null ? null : LatLng(position.latitude, position.longitude);
 
   authStateListener(User fbuser) async {
     if (fbuser == null) {
@@ -115,11 +121,10 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
     if (state == State.Artist) {
       storage.write('state', false);
-      repo.setDioOptions('specialist');
     } else {
       storage.write('state', true);
-      repo.setDioOptions('client');
     }
+    repo.setDioOptions();
   }
 
   changeStatus(status) {
@@ -216,10 +221,13 @@ class AppProvider with ChangeNotifier {
     try {
       GoogleSignIn googleSignIn = GoogleSignIn();
       GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-      GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-      AuthCredential credential =
-          GoogleAuthProvider.credential(accessToken: googleSignInAuthentication.accessToken, idToken: googleSignInAuthentication.idToken);
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken);
       _auth.signInWithCredential(credential);
+      changeStatus(Status.Authorized);
     } catch (e) {
       print(e);
       changeStatus(Status.Unauthorized);
@@ -232,7 +240,8 @@ class AppProvider with ChangeNotifier {
     try {
       LoginResult result = await FacebookAuth.instance.login();
       if (result.status == LoginStatus.success) {
-        AuthCredential credential = FacebookAuthProvider.credential(result.accessToken.token);
+        AuthCredential credential =
+            FacebookAuthProvider.credential(result.accessToken.token);
         await auth.signInWithCredential(credential);
       } else {
         Fluttertoast.showToast(
@@ -289,18 +298,29 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  showArtist(context, artist) async {
-    await showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(13)),
-      ),
-      builder: (BuildContext context) => ArtistWidget(
-        artists.firstWhere((e) => e.id == artist.id, orElse: () => null),
-      ),
-    );
+  showArtist(context, artist, {int access = 1}) async {
+    if (access == 1) {
+      demoorder = await navi.pushNamed<Order>(
+        '/Artist',
+        arguments: artists.firstWhere(
+          (e) => e.id == artist.id,
+          orElse: () => null,
+        ),
+      );
+    }
     notifyListeners();
+
+    // await showModalBottomSheet(
+    //   context: context,
+    //   isScrollControlled: true,
+    //   shape: RoundedRectangleBorder(
+    //     borderRadius: BorderRadius.vertical(top: Radius.circular(13)),
+    //   ),
+    //   builder: (BuildContext context) => ArtistWidget(
+    //     artists.firstWhere((e) => e.id == artist.id, orElse: () => null),
+    //   ),
+    // );
+    // notifyListeners();
   }
 
   showCommentSheet(context, Post post) async {
